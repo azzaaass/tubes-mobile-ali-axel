@@ -1,17 +1,39 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tubes_mobile_al/screen/homepage.dart';
 import 'package:tubes_mobile_al/style.dart/color.dart';
 import 'package:tubes_mobile_al/style.dart/text.dart';
 
-class Payment extends StatelessWidget {
+class Payment extends StatefulWidget {
   Payment({super.key});
 
+  @override
+  State<Payment> createState() => _PaymentState();
+}
+
+class _PaymentState extends State<Payment> {
+  File? _image;
+  final picker = ImagePicker();
   TextEditingController pickController = TextEditingController();
   TextEditingController dropController = TextEditingController();
   TextEditingController notesController = TextEditingController();
   TextEditingController contactController = TextEditingController();
+
+  Future getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +41,7 @@ class Payment extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
           children: [
             Row(
@@ -45,7 +67,7 @@ class Payment extends StatelessWidget {
               "Order Detail",
               style: text_26_500_black,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -60,6 +82,20 @@ class Payment extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  _image != null
+                      ? InkWell(
+                          onTap: getImage,
+                          child: Image.file(
+                            _image!,
+                            height: 200,
+                            width: 200,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: getImage,
+                          child:
+                              const Text('No image selected, click to selct')),
+                  const SizedBox(height: 10,),
                   SizedBox(
                     width: mediaQuery.size.width,
                     child: TextField(

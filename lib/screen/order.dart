@@ -20,7 +20,7 @@ class OrderState extends State<Order> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+          padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
           child: Column(
             children: [
               Row(
@@ -39,7 +39,7 @@ class OrderState extends State<Order> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Expanded(
