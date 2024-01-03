@@ -99,36 +99,29 @@ class _LoginState extends State<Login> {
                         style: text_16_500_black,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     InkWell(
-                      onTap: () => Navigator.push(
+                      onTap: () => Navigator.pushReplacement(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => Center(),
+                            builder: (context) => Homepage(),
                           )),
-                      child: InkWell(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => Homepage(),
-                            )),
-                        child: Container(
-                          width: mediaQuery.size.width,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              color: orange,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                              child: Text(
-                            "Log In",
-                            style: text_16_500_white,
-                          )),
-                        ),
+                      child: Container(
+                        width: mediaQuery.size.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: orange,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                            child: Text(
+                          "Log In",
+                          style: text_16_500_white,
+                        )),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     Expanded(
